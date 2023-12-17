@@ -8,7 +8,7 @@ In case you want to change the game's settings:
     - ```_bin/Debug/game-premake.exe``` 
 - Linux:
     - Edit ```src/config.h```
-    - Rerun with: ```./nobuild```
+    - Rerun with: ```./nobuild```(See USAGE - Linux for details)
 
 ## NOTE
 
