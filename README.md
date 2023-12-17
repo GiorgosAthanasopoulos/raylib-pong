@@ -28,7 +28,7 @@ game logic or other c++ norms).
 - ```git clone https://github.com/GiorgosAthanasopoulos/raylib-pong```
 - ```cd raylib-pong```
 - ```chmod +x bootstrap.sh```
-- ```./bootstrap.sh```
+- ```./bootstrap.sh```(Will download dependencies using apt - change script accordingly for your package manger. Will also clone and build raylib - Comment corresponding lines if you already have raylib installed and in a discoverable by the compiler directory).
 
 # USAGE - Windows (Just use linux, and make your life ez...Anyway here goes...)
 
