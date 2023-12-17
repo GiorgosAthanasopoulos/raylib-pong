@@ -2,6 +2,7 @@
 
 #include "config.h"
 #include "types.h"
+#include <raylib.h>
 
 void BoundCheckPaddleY(int *playerY, int winH, int paddleH) {
   if (*playerY < 0) {
@@ -52,4 +53,14 @@ void ResetGame(Pong *pong) {
   pong->ballY = BALL_START_Y;
   pong->ballColor = DEFAULT_BALL_COLOR;
   pong->gameHasStarted = false;
+}
+
+int AssertTextFitsInViewport(const char *text, int fontSize, int maxW,
+                             int maxH) {
+  int w = MeasureText(text, fontSize);
+  while (w > maxW || fontSize > maxH) {
+    fontSize--;
+    w = MeasureText(text, fontSize);
+  }
+  return fontSize;
 }

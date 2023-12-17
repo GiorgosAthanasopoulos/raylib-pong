@@ -1,4 +1,6 @@
 #include <cmath>
+#include <cstdio>
+#include <cstdlib>
 #include <raylib.h>
 
 #include "config.h"
@@ -51,8 +53,8 @@ void Update(Pong *pong) {
     pong->ballSpeedY = sin(pong->ballAngle * DEG2RAD) * pong->ballSpeed;
   }
 
-  // TODO: if ballX < player1X || ballX > player2X then
-  // someone won - update the score (maybe show message?)
+  // TODO: if ballX < player1X || ballX > player2X (and not out of bounds)
+  // then someone won - update the score (maybe show message?)
   // TODO: Check for collision and update ball color depending
   // on which color player it hit.
   // TODO: if bounced off of a wall calculate new trajectory
@@ -74,6 +76,35 @@ void Draw(Pong *pong) {
                 pong->paddleH, PADDLE_2_COLOR);
   // Ball
   DrawCircle(pong->ballX, pong->ballY, pong->ballRadius, pong->ballColor);
+
+  // Scores
+  char *text = (char *)malloc(sizeof("Score 0: ") + sizeof(char) * 5);
+  sprintf(text, "Score 1: %d", pong->score1);
+  int fontSize = AssertTextFitsInViewport(text, TEXT_FONT_SIZE,
+                                          pong->w / MAX_SCORE_TEXT_W_FACTOR,
+                                          MAX_SCORE_TEXT_H);
+  DrawText(text, SCORE_TEXT_PADDING_X, SCORE_TEXT_PADDING_Y, fontSize,
+           PADDLE_1_COLOR);
+  sprintf(text, "Score 2: %d", pong->score2);
+  fontSize = AssertTextFitsInViewport(text, TEXT_FONT_SIZE,
+                                      pong->w / MAX_SCORE_TEXT_W_FACTOR,
+                                      MAX_SCORE_TEXT_H);
+  int textW = MeasureText(text, fontSize);
+  DrawText(text, pong->w - SCORE_TEXT_PADDING_X - textW, SCORE_TEXT_PADDING_Y,
+           fontSize, PADDLE_2_COLOR);
+  free(text);
+
+  // START GAME HINT
+  if (!pong->gameHasStarted) {
+    const char *text = "PRESS SPACEBAR TO START";
+    int fontSize = AssertTextFitsInViewport(text, TEXT_FONT_SIZE,
+                                            pong->w / MAX_SCORE_TEXT_W_FACTOR,
+                                            MAX_SCORE_TEXT_H);
+    int textW = MeasureText(text, fontSize);
+    DrawText(text, pong->w / 2 - textW / 2,
+             pong->h / 2 - fontSize - pong->ballRadius, fontSize,
+             TEXT_FG_COLOR);
+  }
 
   EndDrawing();
 }
