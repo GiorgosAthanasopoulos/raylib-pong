@@ -13,5 +13,5 @@ cd ../../
 rm -rf raylib
 
 #Clone and run game
-g++ nobuild.c -o nobuild
+gcc nobuild.c -o nobuild
 ./nobuild

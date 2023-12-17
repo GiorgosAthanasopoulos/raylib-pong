@@ -2,6 +2,14 @@
 
 A simple implementation of Pong in raylib.
 
+In case you want to change the game's settings:
+- Windows:
+    - Edit ```$PROJECTS/game-premake/game/src/config.h``` (See USAGE - Windows for details)
+    - ```_bin/Debug/game-premake.exe``` 
+- Linux:
+    - Edit ```src/config.h```
+    - Rerun with: ```./nobuild```
+
 ## NOTE
 
 Although the project source files have .cpp extensions the project is mainly
